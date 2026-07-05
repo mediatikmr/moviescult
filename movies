@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineFlex | Movies & Series Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #e50914;
+            --bg-color: #111;
+            --card-bg: #1c1c1c;
+            --text-color: #ffffff;
+            --text-muted: #aaaaaa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 6%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .nav-logo {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-color);
+        }
+
+        .nav-logo span {
+            color: var(--primary-color);
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #444;
+            border-radius: 20px;
+            padding: 5px 15px;
+        }
+
+        .search-container input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 8px;
+            width: 250px;
+            font-size: 14px;
+        }
+
+        .search-container button {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .search-container button:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Banner Showcase */
+        .hero-banner {
+            height: 75vh;
+            background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            padding: 0 6%;
+            margin-bottom: 40px;
+            transition: background 0.5s ease-in-out;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            margin-top: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .hero-buttons button {
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 15px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .hero-buttons button:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-play {
+            background-color: var(--text-color);
+            color: black;
+        }
+
+        .btn-play:hover {
+            background-color: #e2e2e2;
+        }
+
+        .btn-info {
+            background-color: rgba(109, 109, 110, 0.7);
+            color: white;
+        }
+
+        /* Content Layout Grid */
+        .container {
+            padding: 0 6% 40px 6%;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 12px;
+        }
+
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        /* Card Elements */
+        .movie-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s;
+            position: relative;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.6);
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .movie-info {
+            padding: 15px;
+        }
+
+        .movie-info h3 {
+            font-size: 15px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 8px;
+        }
+
+        .movie-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .rating {
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        /* Error/Status Box Styling */
+        .status-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 16px;
+            padding: 40px;
+            color: var(--text-muted);
+            background: #1c1c1c;
+            border-radius: 8px;
+            border: 1px dashed #444;
+            line-height: 1.6;
+        }
+        
+        .status-message strong {
+            color: var(--primary-color);
+            display: block;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">CINE<span>FLEX</span></div>
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search movies or series...">
+            <button id="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+    </nav>
+
+    <header class="hero-banner" id="hero-banner">
+        <div class="hero-content">
+            <h1 id="hero-title">Featured Entertainment</h1>
+            <p id="hero-overview">Loading the latest trending blockbusters directly to your platform...</p>
+            <div class="hero-buttons">
+                <button class="btn-play"><i class="fas fa-play"></i> Watch Now</button>
+                <button class="btn-info"><i class="fas fa-info-circle"></i> View Info</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="movies-section">
+            <h2 class="section-title" id="gallery-title">Trending Now</h2>
+            <div class="movie-grid" id="movie-grid">
+                <div class="status-message">Connecting to database servers...</div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // API Configuration (Your exact key is embedded here)
+        const API_KEY = 'c86af4120ef1ce9d16c0cd75fab37605';
+        const BASE_URL = 'https://api.themoviedb.org/3';
+        const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+        const BACKDROP_URL = 'https://image.tmdb.org/t/p/original';
+
+        // DOM Elements
+        const movieGrid = document.getElementById('movie-grid');
+        const searchInput = document.getElementById('search-input');
+        const searchBtn = document.getElementById('search-btn');
+        const galleryTitle = document.getElementById('gallery-title');
+        const heroBanner = document.getElementById('hero-banner');
+        const heroTitle = document.getElementById('hero-title');
+        const heroOverview = document.getElementById('hero-overview');
+
+        // Startup App Setup
+        document.addEventListener('DOMContentLoaded', () => {
+            getTrendingMovies();
+        });
+
+        // Fetch Trending Data Array from TMDB
+        async function getTrendingMovies() {
+            try {
+                const response = await fetch(`${BASE_URL}/trending/all/day?api_key=${API_KEY}`);
+                const data = await response.json();
+                
+                // Catch any explicit invalid API key errors from the response payload
+                if (data.success === false) {
+                    showKeyError(data.status_message);
+                    return;
+                }
+
+                if(data.results && data.results.length > 0) {
+                    setupHeroBanner(data.results[0]);
+                    displayMovies(data.results);
+                } else {
+                    movieGrid.innerHTML = `<div class="status-message"><strong>No Media Found</strong>The server didn't send back any media items.</div>`;
+                }
+            } catch (error) {
+                console.error("Network interface pipeline error:", error);
+                movieGrid.innerHTML = `<div class="status-message"><strong>Network Failure</strong>Could not establish a connection to TMDB servers. Check your internet connection.</div>`;
+            }
+        }
+
+        // Output Media Item Cards dynamically
+        function displayMovies(movies) {
+            movieGrid.innerHTML = '';
+            
+            movies.forEach(movie => {
+                const { title, name, poster_path, vote_average, release_date, first_air_date } = movie;
+                const displayTitle = title || name || 'Untitled Release';
+                const displayDate = (release_date || first_air_date || '').split('-')[0] || 'N/A';
+                const posterImg = poster_path ? `${IMG_URL}${poster_path}` : 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=500';
+
+                const card = document.createElement('div');
+                card.classList.add('movie-card');
+                card.innerHTML = `
+                    <img src="${posterImg}" alt="${displayTitle}">
+                    <div class="movie-info">
+                        <h3>${displayTitle}</h3>
+                        <div class="movie-meta">
+                            <span>${displayDate}</span>
+                            <span class="rating"><i class="fas fa-star"></i> ${vote_average ? vote_average.toFixed(1) : '0.0'}</span>
+                        </div>
+                    </div>
+                `;
+                
+                // Show Details Box Handler
+                card.addEventListener('click', () => {
+                    alert(`Title: ${displayTitle}\nYear: ${displayDate}\nRating: ⭐ ${vote_average ? vote_average.toFixed(1) : 'N/A'}\n\nOverview: ${movie.overview || 'No synopsis description provided.'}`);
+                });
+                
+                movieGrid.appendChild(card);
+            });
+        }
+
+        // Populate Hero Header Banner Display
+        function setupHeroBanner(movie) {
+            const bannerImg = movie.backdrop_path ? `${BACKDROP_URL}${movie.backdrop_path}` : '';
+            if(bannerImg) {
+                heroBanner.style.background = `linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.2)), url('${bannerImg}') no-repeat center center/cover`;
+            }
+            heroTitle.textContent = movie.title || movie.name;
+            heroOverview.textContent = movie.overview ? movie.overview.substring(0, 180) + '...' : 'No summary context available currently.';
+        }
+
+        // Multi-Search Query Execution Engine
+        async function performSearch() {
+            const query = searchInput.value.trim();
+            if (!query) {
+                galleryTitle.textContent = "Trending Now";
+                getTrendingMovies();
+                return;
+            }
+
+            galleryTitle.textContent = `Search Results for: "${query}"`;
+            movieGrid.innerHTML = '<div class="status-message">Scanning database files...</div>';
+
+            try {
+                const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
+                const data = await response.json();
+                
+                if (data.success === false) {
+                    showKeyError(data.status_message);
+                    return;
+                }
+
+                if (data.results && data.results.length > 0) {
+                    displayMovies(data.results);
+                } else {
+                    movieGrid.innerHTML = `<div class="status-message"><strong>No Matches</strong>We couldn't find any movies or series matching "${query}".</div>`;
+                }
+            } catch (error) {
+                console.error("Search module error exception:", error);
+            }
+        }
+
+        // API Key Validation Error Interface Panel
+        function showKeyError(serverMessage) {
+            movieGrid.innerHTML = `
+                <div class="status-message">
+                    <strong>⚠️ Database Access Denied</strong>
+                    The TMDB platform rejected your API Key.<br>
+                    <span style="color: #ff8888; font-size: 14px;">Reason: "${serverMessage}"</span><br><br>
+                    <strong>How to fix this:</strong>
+                    Your API Key <code>c86af412...</code> was sent to the database but was marked as invalid or expired by TMDB. 
+                    Please double check your account profile dashboard at <a href="https://www.themoviedb.org/" target="_blank" style="color: #3498db; text-decoration: underline;">themoviedb.org</a> to ensure the key hasn't been suspended.
+                </div>
+            `;
+        }
+
+        // Action Interface Event Triggers
+        searchBtn.addEventListener('click', performSearch);
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') performSearch();
+        });
+    </script>
+</body>
+</html>

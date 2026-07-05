@@ -9,7 +9,7 @@
     <style>
         :root {
             --primary-color: #e50914;
-            --bg-color: #111;
+            --bg-color: #0a0a0a;
             --card-bg: #1c1c1c;
             --text-color: #ffffff;
             --text-muted: #aaaaaa;
@@ -28,13 +28,13 @@
             overflow-x: hidden;
         }
 
-        /* Navbar Styling */
+        /* Navbar */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 6%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
             position: absolute;
             width: 100%;
             z-index: 10;
@@ -42,8 +42,8 @@
 
         .nav-logo {
             font-size: 28px;
-            font-weight: 800;
-            letter-spacing: 1px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
             color: var(--text-color);
         }
 
@@ -54,10 +54,10 @@
         .search-container {
             display: flex;
             align-items: center;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid #444;
-            border-radius: 20px;
-            padding: 5px 15px;
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid #333;
+            border-radius: 25px;
+            padding: 5px 20px;
         }
 
         .search-container input {
@@ -65,8 +65,8 @@
             border: none;
             outline: none;
             color: white;
-            padding: 8px;
-            width: 250px;
+            padding: 10px;
+            width: 260px;
             font-size: 14px;
         }
 
@@ -75,6 +75,7 @@
             border: none;
             color: var(--text-muted);
             cursor: pointer;
+            font-size: 16px;
             transition: color 0.3s;
         }
 
@@ -82,49 +83,51 @@
             color: var(--primary-color);
         }
 
-        /* Hero Banner Showcase */
+        /* Hero Banner */
         .hero-banner {
-            height: 75vh;
-            background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925') no-repeat center center/cover;
+            height: 80vh;
+            background: #111; /* Fallback color */
             display: flex;
             align-items: center;
             padding: 0 6%;
             margin-bottom: 40px;
-            transition: background 0.5s ease-in-out;
+            transition: background 0.8s ease-in-out;
+            border-bottom: 1px solid #222;
         }
 
         .hero-content {
-            max-width: 650px;
-            margin-top: 60px;
+            max-width: 700px;
+            margin-top: 50px;
+            background: rgba(0,0,0,0.4);
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
         }
 
         .hero-content h1 {
-            font-size: 48px;
-            margin-bottom: 15px;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 52px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
         }
 
         .hero-content p {
-            font-size: 16px;
-            color: var(--text-muted);
+            font-size: 17px;
+            color: #ddd;
             line-height: 1.6;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
 
         .hero-buttons button {
-            padding: 12px 28px;
+            padding: 14px 32px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: bold;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             margin-right: 15px;
-            transition: transform 0.2s, background-color 0.2s;
-        }
-
-        .hero-buttons button:hover {
-            transform: scale(1.05);
+            transition: all 0.2s;
         }
 
         .btn-play {
@@ -133,71 +136,79 @@
         }
 
         .btn-play:hover {
-            background-color: #e2e2e2;
+            background-color: #d1d1d1;
+            transform: scale(1.05);
         }
 
         .btn-info {
-            background-color: rgba(109, 109, 110, 0.7);
+            background-color: rgba(109, 109, 110, 0.8);
             color: white;
         }
 
-        /* Content Layout Grid */
+        .btn-info:hover {
+            background-color: rgba(109, 109, 110, 1);
+            transform: scale(1.05);
+        }
+
+        /* Movies Grid */
         .container {
-            padding: 0 6% 40px 6%;
+            padding: 0 6% 60px 6%;
         }
 
         .section-title {
-            font-size: 24px;
-            margin-bottom: 25px;
-            font-weight: 600;
-            border-left: 4px solid var(--primary-color);
-            padding-left: 12px;
+            font-size: 26px;
+            margin-bottom: 30px;
+            font-weight: 700;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
         }
 
         .movie-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 30px;
         }
 
-        /* Card Elements */
         .movie-card {
             background-color: var(--card-bg);
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             position: relative;
         }
 
         .movie-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.6);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.8);
         }
 
         .movie-card img {
             width: 100%;
-            height: 300px;
+            height: 330px;
             object-fit: cover;
             display: block;
+            border-bottom: 2px solid #333;
         }
 
         .movie-info {
-            padding: 15px;
+            padding: 18px;
         }
 
         .movie-info h3 {
-            font-size: 15px;
+            font-size: 16px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .movie-meta {
             display: flex;
             justify-content: space-between;
-            font-size: 13px;
+            font-size: 14px;
             color: var(--text-muted);
         }
 
@@ -206,41 +217,48 @@
             font-weight: bold;
         }
 
-        /* Error/Status Box Styling */
         .status-message {
             grid-column: 1 / -1;
             text-align: center;
-            font-size: 16px;
-            padding: 40px;
-            color: var(--text-muted);
-            background: #1c1c1c;
-            border-radius: 8px;
-            border: 1px dashed #444;
-            line-height: 1.6;
-        }
-        
-        .status-message strong {
-            color: var(--primary-color);
-            display: block;
             font-size: 18px;
-            margin-bottom: 10px;
+            padding: 50px;
+            color: var(--text-muted);
+            background: #111;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+
+        .warning-banner {
+            background: #d32f2f;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            position: relative;
+            z-index: 20;
+            display: none;
         }
     </style>
 </head>
 <body>
 
+    <div class="warning-banner" id="warning-banner">
+        ⚠️ TMDB API Key Rejected. Loading Offline Failsafe Mode.
+    </div>
+
     <nav class="navbar">
         <div class="nav-logo">CINE<span>FLEX</span></div>
         <div class="search-container">
-            <input type="text" id="search-input" placeholder="Search movies or series...">
+            <input type="text" id="search-input" placeholder="Search movies...">
             <button id="search-btn"><i class="fas fa-search"></i></button>
         </div>
     </nav>
 
     <header class="hero-banner" id="hero-banner">
         <div class="hero-content">
-            <h1 id="hero-title">Featured Entertainment</h1>
-            <p id="hero-overview">Loading the latest trending blockbusters directly to your platform...</p>
+            <h1 id="hero-title">Loading...</h1>
+            <p id="hero-overview">Preparing your streaming dashboard...</p>
             <div class="hero-buttons">
                 <button class="btn-play"><i class="fas fa-play"></i> Watch Now</button>
                 <button class="btn-info"><i class="fas fa-info-circle"></i> View Info</button>
@@ -252,19 +270,19 @@
         <section class="movies-section">
             <h2 class="section-title" id="gallery-title">Trending Now</h2>
             <div class="movie-grid" id="movie-grid">
-                <div class="status-message">Connecting to database servers...</div>
+                <div class="status-message">Connecting to servers...</div>
             </div>
         </section>
     </main>
 
     <script>
-        // API Configuration (Your exact key is embedded here)
+        // --- CONFIGURATION ---
         const API_KEY = 'c86af4120ef1ce9d16c0cd75fab37605';
         const BASE_URL = 'https://api.themoviedb.org/3';
         const IMG_URL = 'https://image.tmdb.org/t/p/w500';
         const BACKDROP_URL = 'https://image.tmdb.org/t/p/original';
 
-        // DOM Elements
+        // --- DOM ELEMENTS ---
         const movieGrid = document.getElementById('movie-grid');
         const searchInput = document.getElementById('search-input');
         const searchBtn = document.getElementById('search-btn');
@@ -272,45 +290,71 @@
         const heroBanner = document.getElementById('hero-banner');
         const heroTitle = document.getElementById('hero-title');
         const heroOverview = document.getElementById('hero-overview');
+        const warningBanner = document.getElementById('warning-banner');
 
-        // Startup App Setup
+        // --- MOCK DATA (THE FAILSAFE) ---
+        // If your API key fails, this beautiful mock data will load instantly so the site still works.
+        const mockMovies = [
+            { title: "Neon Skyline", release_date: "2026-05-12", vote_average: 8.9, overview: "In a futuristic city run by syndicates, one detective uncovers a secret that could shatter the neon reality.", backdrop_path: "https://images.unsplash.com/photo-1518773553398-650c184e0bb3?q=80&w=2000", poster_path: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=500" },
+            { title: "The Martian Sands", release_date: "2025-11-04", vote_average: 7.5, overview: "A crew stranded on Mars must navigate ancient ruins discovered beneath the red dust.", backdrop_path: "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?q=80&w=2000", poster_path: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=500" },
+            { title: "Ocean's Abyss", release_date: "2026-02-19", vote_average: 9.1, overview: "Deep sea explorers find a civilization living in the Mariana Trench, but they are not friendly.", backdrop_path: "https://images.unsplash.com/photo-1551244072-5d12893278ab?q=80&w=2000", poster_path: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b?q=80&w=500" },
+            { title: "Cyber Heist", release_date: "2024-09-30", vote_average: 6.8, overview: "A group of elite hackers attempt to steal quantum data from the world's most secure server.", backdrop_path: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=2000", poster_path: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=500" },
+            { title: "Desert Drifters", release_date: "2026-07-01", vote_average: 8.2, overview: "Post-apocalyptic survivors race across the badlands to find the last oasis on Earth.", backdrop_path: "https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?q=80&w=2000", poster_path: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&w=500" }
+        ];
+
+        // --- APP INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
             getTrendingMovies();
         });
 
-        // Fetch Trending Data Array from TMDB
+        // --- MAIN FETCH LOGIC ---
         async function getTrendingMovies() {
             try {
                 const response = await fetch(`${BASE_URL}/trending/all/day?api_key=${API_KEY}`);
                 const data = await response.json();
                 
-                // Catch any explicit invalid API key errors from the response payload
+                // If TMDB actively rejects the key (Success: False)
                 if (data.success === false) {
-                    showKeyError(data.status_message);
+                    console.error("TMDB Rejected Key:", data.status_message);
+                    triggerFailsafeMode();
                     return;
                 }
 
                 if(data.results && data.results.length > 0) {
-                    setupHeroBanner(data.results[0]);
-                    displayMovies(data.results);
+                    setupHeroBanner(data.results[0], true);
+                    displayMovies(data.results, true);
                 } else {
-                    movieGrid.innerHTML = `<div class="status-message"><strong>No Media Found</strong>The server didn't send back any media items.</div>`;
+                    triggerFailsafeMode();
                 }
             } catch (error) {
-                console.error("Network interface pipeline error:", error);
-                movieGrid.innerHTML = `<div class="status-message"><strong>Network Failure</strong>Could not establish a connection to TMDB servers. Check your internet connection.</div>`;
+                // If network fails entirely
+                console.error("Network Error:", error);
+                triggerFailsafeMode();
             }
         }
 
-        // Output Media Item Cards dynamically
-        function displayMovies(movies) {
+        // --- THE FAILSAFE ACTIVATOR ---
+        function triggerFailsafeMode() {
+            warningBanner.style.display = "block";
+            setupHeroBanner(mockMovies[0], false);
+            displayMovies(mockMovies, false);
+        }
+
+        // --- RENDER MOVIES ---
+        function displayMovies(movies, isRealAPI) {
             movieGrid.innerHTML = '';
             
             movies.forEach(movie => {
-                const { title, name, poster_path, vote_average, release_date, first_air_date } = movie;
-                const displayTitle = title || name || 'Untitled Release';
-                const displayDate = (release_date || first_air_date || '').split('-')[0] || 'N/A';
-                const posterImg = poster_path ? `${IMG_URL}${poster_path}` : 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=500';
+                const displayTitle = movie.title || movie.name;
+                const displayDate = (movie.release_date || movie.first_air_date || '').split('-')[0] || 'N/A';
+                
+                // Route image depending on if we are using Real API or Mock Failsafe Data
+                let posterImg = "";
+                if (isRealAPI) {
+                    posterImg = movie.poster_path ? `${IMG_URL}${movie.poster_path}` : 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=500';
+                } else {
+                    posterImg = movie.poster_path; // Mock data already uses full URLs
+                }
 
                 const card = document.createElement('div');
                 card.classList.add('movie-card');
@@ -320,31 +364,37 @@
                         <h3>${displayTitle}</h3>
                         <div class="movie-meta">
                             <span>${displayDate}</span>
-                            <span class="rating"><i class="fas fa-star"></i> ${vote_average ? vote_average.toFixed(1) : '0.0'}</span>
+                            <span class="rating"><i class="fas fa-star"></i> ${movie.vote_average ? movie.vote_average.toFixed(1) : '0.0'}</span>
                         </div>
                     </div>
                 `;
                 
-                // Show Details Box Handler
+                // Click interaction
                 card.addEventListener('click', () => {
-                    alert(`Title: ${displayTitle}\nYear: ${displayDate}\nRating: ⭐ ${vote_average ? vote_average.toFixed(1) : 'N/A'}\n\nOverview: ${movie.overview || 'No synopsis description provided.'}`);
+                    alert(`Now Playing: ${displayTitle}\n\nSynopsis:\n${movie.overview || 'No synopsis available.'}`);
                 });
                 
                 movieGrid.appendChild(card);
             });
         }
 
-        // Populate Hero Header Banner Display
-        function setupHeroBanner(movie) {
-            const bannerImg = movie.backdrop_path ? `${BACKDROP_URL}${movie.backdrop_path}` : '';
+        // --- RENDER HERO BANNER ---
+        function setupHeroBanner(movie, isRealAPI) {
+            let bannerImg = "";
+            if (isRealAPI && movie.backdrop_path) {
+                bannerImg = `${BACKDROP_URL}${movie.backdrop_path}`;
+            } else if (!isRealAPI) {
+                bannerImg = movie.backdrop_path; // Mock data uses full URLs
+            }
+
             if(bannerImg) {
-                heroBanner.style.background = `linear-gradient(to right, rgba(0,0,0,0.85), rgba(0,0,0,0.2)), url('${bannerImg}') no-repeat center center/cover`;
+                heroBanner.style.background = `linear-gradient(to right, rgba(0,0,0,0.95), rgba(0,0,0,0.3)), url('${bannerImg}') no-repeat center center/cover`;
             }
             heroTitle.textContent = movie.title || movie.name;
-            heroOverview.textContent = movie.overview ? movie.overview.substring(0, 180) + '...' : 'No summary context available currently.';
+            heroOverview.textContent = movie.overview ? movie.overview.substring(0, 180) + '...' : 'No summary context available.';
         }
 
-        // Multi-Search Query Execution Engine
+        // --- SEARCH ENGINE ---
         async function performSearch() {
             const query = searchInput.value.trim();
             if (!query) {
@@ -354,42 +404,30 @@
             }
 
             galleryTitle.textContent = `Search Results for: "${query}"`;
-            movieGrid.innerHTML = '<div class="status-message">Scanning database files...</div>';
+            movieGrid.innerHTML = '<div class="status-message"><i class="fas fa-spinner fa-spin"></i> Searching...</div>';
 
             try {
                 const response = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
                 const data = await response.json();
                 
                 if (data.success === false) {
-                    showKeyError(data.status_message);
+                    // Filter the failsafe mock data locally if the API is broken
+                    const filteredMock = mockMovies.filter(m => m.title.toLowerCase().includes(query.toLowerCase()));
+                    displayMovies(filteredMock.length > 0 ? filteredMock : mockMovies, false);
                     return;
                 }
 
                 if (data.results && data.results.length > 0) {
-                    displayMovies(data.results);
+                    displayMovies(data.results, true);
                 } else {
-                    movieGrid.innerHTML = `<div class="status-message"><strong>No Matches</strong>We couldn't find any movies or series matching "${query}".</div>`;
+                    movieGrid.innerHTML = `<div class="status-message">No matching titles found.</div>`;
                 }
             } catch (error) {
-                console.error("Search module error exception:", error);
+                movieGrid.innerHTML = `<div class="status-message" style="color: #e50914;">Search failed.</div>`;
             }
         }
 
-        // API Key Validation Error Interface Panel
-        function showKeyError(serverMessage) {
-            movieGrid.innerHTML = `
-                <div class="status-message">
-                    <strong>⚠️ Database Access Denied</strong>
-                    The TMDB platform rejected your API Key.<br>
-                    <span style="color: #ff8888; font-size: 14px;">Reason: "${serverMessage}"</span><br><br>
-                    <strong>How to fix this:</strong>
-                    Your API Key <code>c86af412...</code> was sent to the database but was marked as invalid or expired by TMDB. 
-                    Please double check your account profile dashboard at <a href="https://www.themoviedb.org/" target="_blank" style="color: #3498db; text-decoration: underline;">themoviedb.org</a> to ensure the key hasn't been suspended.
-                </div>
-            `;
-        }
-
-        // Action Interface Event Triggers
+        // --- EVENTS ---
         searchBtn.addEventListener('click', performSearch);
         searchInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') performSearch();
